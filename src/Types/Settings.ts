@@ -1,5 +1,5 @@
 type Settings = {
-  blockchainUrl: string;
+  blockchainUrl?: string;
 };
 
 export default Settings;

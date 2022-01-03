@@ -1,26 +1,26 @@
 import { NextFunction, Request, Response } from 'express';
 
-import {Settings} from './Types';
+import web3 from 'web3';
+
+import {Settings, Web3Interface} from './Types';
 
 export * from './Types';
 
 declare global {
   namespace Express {
     interface Request {
-      // Additional Request enhancements go in here
-      // template: TemplateInterface;
+      web3: Web3Interface;
     }
   }
 }
 
 export default (additionalSettings: Settings) => (req: Request, res: Response, next: NextFunction) => {
-  // Set any default settings and append additional settings
-  const settings: Settings = {
+  const settings: Required<Settings> = {
+    blockchainUrl: `https://localhost:8545/`,
     ...additionalSettings
   }
 
-  // Define the object that is set as a Request enhancement
-  // req.template = TemplateObject;
+  req.web3 = new web3(settings.blockchainUrl);
 
   next();
 };
