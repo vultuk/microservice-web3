@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 
-import web3 from 'web3';
+import Web3 from 'web3';
 
-import { Settings, Web3Interface } from './Types';
+import { Settings } from './Types';
 
 export * from './Types';
 
 declare global {
   namespace Express {
     interface Request {
-      web3: Web3Interface;
+      web3: Web3;
     }
   }
 }
@@ -20,7 +20,7 @@ export default (additionalSettings?: Settings) => (req: Request, res: Response, 
     ...(additionalSettings || {}),
   };
 
-  req.web3 = new web3(settings.blockchainUrl);
+  req.web3 = new Web3(settings.blockchainUrl);
 
   next();
 };
