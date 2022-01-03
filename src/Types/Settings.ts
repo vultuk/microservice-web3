@@ -1,2 +1,5 @@
-export type Settings = {
+type Settings = {
+  blockchainUrl: string;
 };
+
+export default Settings;

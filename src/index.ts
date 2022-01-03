@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { Settings } from './Types/Settings';
+import {Settings} from './Types';
 
 export * from './Types';
 
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-export default (additionalSettings?: Settings) => (req: Request, res: Response, next: NextFunction) => {
+export default (additionalSettings: Settings) => (req: Request, res: Response, next: NextFunction) => {
   // Set any default settings and append additional settings
   const settings: Settings = {
     ...additionalSettings
